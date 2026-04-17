@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora Febecos</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Arial, Helvetica, sans-serif; background: #fff; padding: 0; }
+
+.card { background: #fff; border: 1px solid #e2e8f0; border-radius: 16px; overflow: hidden; }
+.head { background: #2D5A27; padding: 20px 24px; }
+.head h3 { font-family: 'Arial Black', Arial, sans-serif; font-size: 18px; font-weight: 900; color: #fff; margin: 0 0 3px; }
+.head p { font-size: 12px; color: rgba(255,255,255,.7); margin: 0; }
+.body { padding: 20px 24px; }
+
+.lbl { font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 1.5px; color: #94a3b8; display: block; margin-bottom: 8px; }
+
+.btns { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 18px; }
+.btn {
+  font-family: Arial, sans-serif; font-size: 13px; font-weight: 700;
+  padding: 8px 16px; border-radius: 50px; cursor: pointer;
+  border: 2px solid #e2e8f0; background: #f8fafc; color: #64748b;
+  transition: all .15s;
+}
+.btn.on { background: #F0F7EF; border-color: #2D5A27; color: #2D5A27; }
+
+.slider-row { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+input[type=range] {
+  flex: 1; -webkit-appearance: none; appearance: none;
+  height: 5px; background: #e2e8f0; border-radius: 3px; outline: none; border: none;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%;
+  background: #2D5A27; cursor: pointer; border: 3px solid #fff;
+  box-shadow: 0 0 0 2px #2D5A27;
+}
+input[type=range]::-moz-range-thumb {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: #2D5A27; cursor: pointer; border: 3px solid #fff;
+}
+.num { font-family: 'Arial Black', Arial, sans-serif; font-size: 22px; font-weight: 900; color: #0f172a; min-width: 30px; text-align: right; }
+
+.result-box { background: #F0F7EF; border: 2px solid #2D5A27; border-radius: 14px; padding: 18px 20px; margin-bottom: 12px; }
+.result-lbl { font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 1.5px; color: #2D5A27; margin-bottom: 5px; }
+.result-val { font-family: 'Arial Black', Arial, sans-serif; font-size: 36px; font-weight: 900; color: #2D5A27; line-height: 1; }
+.result-sub { font-size: 12px; color: #4a7c59; margin-top: 4px; }
+
+.mini { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 14px; }
+.mini-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px 14px; }
+.mini-lbl { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #94a3b8; font-weight: 700; margin-bottom: 3px; }
+.mini-val { font-family: 'Arial Black', Arial, sans-serif; font-size: 17px; font-weight: 900; color: #0f172a; }
+
+.cta { display: block; width: 100%; background: #2D5A27; color: #fff; font-family: 'Arial Black', Arial, sans-serif; font-size: 13px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; padding: 14px; border-radius: 50px; text-align: center; text-decoration: none; margin-top: 4px; }
+.cta:hover { background: #1e4020; }
+
+.foot { background: #f8fafc; border-top: 1px solid #e2e8f0; padding: 10px 24px; text-align: center; font-size: 10px; font-weight: 900; color: #94a3b8; letter-spacing: 2px; text-transform: uppercase; }
+
+#custom-wrap { display: none; margin-top: 10px; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="head">
+    <h3>Calculá tu margen estimado</h3>
+    <p>Tiempo real · Sin registro</p>
+  </div>
+  <div class="body">
+
+    <label class="lbl">Tu nivel de trabajo</label>
+    <div class="btns" id="btns-nivel">
+      <div class="btn" data-nivel="publico">Público</div>
+      <div class="btn on" data-nivel="revendedor">Revendedor</div>
+      <div class="btn" data-nivel="distribuidor">Distribuidor</div>
+    </div>
+
+    <label class="lbl">Equipos por mes</label>
+    <div class="slider-row">
+      <input type="range" id="eq" min="1" max="20" value="4" step="1">
+      <span class="num" id="eq-n">4</span>
+    </div>
+
+    <div class="result-box">
+      <div class="result-lbl">Margen mensual estimado</div>
+      <div class="result-val" id="mensual">$875.392</div>
+      <div class="result-sub" id="desc">4 equipos × $218.848 de margen</div>
+    </div>
+
+    <div class="mini">
+      <div class="mini-box"><div class="mini-lbl">Margen anual</div><div class="mini-val" id="anual">$10.5M</div></div>
+      <div class="mini-box"><div class="mini-lbl">Margen / equipo</div><div class="mini-val" id="xeq">$218.733</div></div>
+    </div>
+
+    <a href="#contacto" class="cta" id="cta-btn">Agendá tu charla gratis →</a>
+
+  </div>
+  <div class="foot">🛡 Información confidencial · Solo para socios</div>
+</div>
+
+<script>
+var P = {
+  publico:     {c:1694404, v:1694404},
+  revendedor:  {c:1475671, v:1694404},
+  distribuidor:{c:1249556, v:1694404}
+};
+var nivel = 'revendedor';
+
+function fmt(n){ return '$' + Math.round(n).toLocaleString('es-AR'); }
+function fmtM(n){ return n >= 1000000 ? '$' + (n/1000000).toFixed(1) + 'M' : '$' + Math.round(n/1000) + 'K'; }
+
+function calc(){
+  var eq = parseInt(document.getElementById('eq').value);
+  document.getElementById('eq-n').textContent = eq;
+  var m = Math.max(0, P[nivel].v - P[nivel].c);
+  var tot = m * eq;
+  document.getElementById('mensual').textContent = fmt(tot);
+  document.getElementById('desc').textContent = eq + ' equipo' + (eq > 1 ? 's' : '') + ' × ' + fmt(m) + ' de margen';
+  document.getElementById('anual').textContent = fmtM(tot * 12);
+  document.getElementById('xeq').textContent = fmt(m);
+}
+
+// Botones de nivel
+var btns = document.querySelectorAll('#btns-nivel .btn');
+for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('click', function(){
+    nivel = this.getAttribute('data-nivel');
+    for (var j = 0; j < btns.length; j++) btns[j].classList.remove('on');
+    this.classList.add('on');
+    calc();
+  });
+}
+
+// Slider
+document.getElementById('eq').addEventListener('input', calc);
+
+calc();
+</script>
+</body>
+</html>
