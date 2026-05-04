@@ -16,15 +16,6 @@ body { font-family: Arial, Helvetica, sans-serif; background: #fff; padding: 0; 
 
 .lbl { font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 1.5px; color: #94a3b8; display: block; margin-bottom: 8px; }
 
-.btns { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 18px; }
-.btn {
-  font-family: Arial, sans-serif; font-size: 13px; font-weight: 700;
-  padding: 8px 16px; border-radius: 50px; cursor: pointer;
-  border: 2px solid #e2e8f0; background: #f8fafc; color: #64748b;
-  transition: all .15s;
-}
-.btn.on { background: #F0F7EF; border-color: #2D5A27; color: #2D5A27; }
-
 .slider-row { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
 input[type=range] {
   flex: 1; -webkit-appearance: none; appearance: none;
@@ -41,6 +32,10 @@ input[type=range]::-moz-range-thumb {
 }
 .num { font-family: 'Arial Black', Arial, sans-serif; font-size: 22px; font-weight: 900; color: #0f172a; min-width: 30px; text-align: right; }
 
+.badge { background: #F0F7EF; border: 2px solid #2D5A27; border-radius: 50px; padding: 8px 18px; margin-bottom: 18px; display: inline-flex; align-items: center; gap: 8px; }
+.badge-txt { font-size: 13px; font-weight: 900; color: #2D5A27; }
+.badge-sub { font-size: 12px; color: #4a7c59; }
+
 .result-box { background: #F0F7EF; border: 2px solid #2D5A27; border-radius: 14px; padding: 18px 20px; margin-bottom: 12px; }
 .result-lbl { font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 1.5px; color: #2D5A27; margin-bottom: 5px; }
 .result-val { font-family: 'Arial Black', Arial, sans-serif; font-size: 36px; font-weight: 900; color: #2D5A27; line-height: 1; }
@@ -51,12 +46,16 @@ input[type=range]::-moz-range-thumb {
 .mini-lbl { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #94a3b8; font-weight: 700; margin-bottom: 3px; }
 .mini-val { font-family: 'Arial Black', Arial, sans-serif; font-size: 17px; font-weight: 900; color: #0f172a; }
 
+.beneficios { margin-bottom: 16px; }
+.ben { font-size: 13px; color: #475569; padding: 4px 0; }
+.ben span { color: #2D5A27; font-weight: 900; margin-right: 6px; }
+
 .cta { display: block; width: 100%; background: #2D5A27; color: #fff; font-family: 'Arial Black', Arial, sans-serif; font-size: 13px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; padding: 14px; border-radius: 50px; text-align: center; text-decoration: none; margin-top: 4px; }
 .cta:hover { background: #1e4020; }
 
 .foot { background: #f8fafc; border-top: 1px solid #e2e8f0; padding: 10px 24px; text-align: center; font-size: 10px; font-weight: 900; color: #94a3b8; letter-spacing: 2px; text-transform: uppercase; }
 
-#custom-wrap { display: none; margin-top: 10px; }
+.nota { font-size: 11px; color: #94a3b8; text-align: center; margin-top: 10px; line-height: 1.5; }
 </style>
 </head>
 <body>
@@ -67,43 +66,47 @@ input[type=range]::-moz-range-thumb {
   </div>
   <div class="body">
 
-    <label class="lbl">Tu nivel de trabajo</label>
-    <div class="btns" id="btns-nivel">
-      <div class="btn" data-nivel="publico">Público</div>
-      <div class="btn on" data-nivel="revendedor">Revendedor</div>
-      <div class="btn" data-nivel="distribuidor">Distribuidor</div>
+    <div class="badge">
+      <div>
+        <div class="badge-txt">✓ Revendedor — 20% de descuento</div>
+        <div class="badge-sub">Sin mínimo de compra · Sin contrato · Sin exclusividad</div>
+      </div>
     </div>
 
-    <label class="lbl">Equipos por mes</label>
+    <label class="lbl">¿Cuántos equipos por mes estimás vender?</label>
     <div class="slider-row">
-      <input type="range" id="eq" min="1" max="20" value="4" step="1">
-      <span class="num" id="eq-n">4</span>
+      <input type="range" id="eq" min="1" max="20" value="2" step="1">
+      <span class="num" id="eq-n">2</span>
     </div>
 
     <div class="result-box">
       <div class="result-lbl">Margen mensual estimado</div>
-      <div class="result-val" id="mensual">$875.392</div>
-      <div class="result-sub" id="desc">4 equipos × $218.848 de margen</div>
+      <div class="result-val" id="mensual">$626.000</div>
+      <div class="result-sub" id="desc">2 equipos × $313.000 de margen</div>
     </div>
 
     <div class="mini">
-      <div class="mini-box"><div class="mini-lbl">Margen anual</div><div class="mini-val" id="anual">$10.5M</div></div>
-      <div class="mini-box"><div class="mini-lbl">Margen / equipo</div><div class="mini-val" id="xeq">$218.733</div></div>
+      <div class="mini-box"><div class="mini-lbl">Margen anual</div><div class="mini-val" id="anual">$7.5M</div></div>
+      <div class="mini-box"><div class="mini-lbl">Margen / equipo</div><div class="mini-val" id="xeq">$313.000</div></div>
     </div>
 
-    <a href="#contacto" class="cta" id="cta-btn">Agendá tu charla gratis →</a>
+    <div class="beneficios">
+      <div class="ben"><span>✓</span>Kit dimensionado por nuestro equipo técnico</div>
+      <div class="ben"><span>✓</span>Soporte técnico durante la venta e instalación</div>
+      <div class="ben"><span>✓</span>Garantía integral del sistema</div>
+      <div class="ben"><span>✓</span>Sin stock, pedís cuando tenés la venta</div>
+    </div>
 
+    <a href="https://revendedores-git-main-pozeroagro.vercel.app" class="cta" target="_blank">Registrarme como revendedor →</a>
+    <p class="nota">* Margen orientativo sobre precio de lista actual.<br>Varía con el tipo de cambio.</p>
   </div>
   <div class="foot">🛡 Información confidencial · Solo para socios</div>
 </div>
 
 <script>
-var P = {
-  publico:     {c:1694404, v:1694404},
-  revendedor:  {c:1475671, v:1694404},
-  distribuidor:{c:1249556, v:1694404}
-};
-var nivel = 'revendedor';
+var PRECIO_LISTA = 1566000;
+var DESCUENTO = 0.20;
+var margenXeq = Math.round(PRECIO_LISTA * DESCUENTO);
 
 function fmt(n){ return '$' + Math.round(n).toLocaleString('es-AR'); }
 function fmtM(n){ return n >= 1000000 ? '$' + (n/1000000).toFixed(1) + 'M' : '$' + Math.round(n/1000) + 'K'; }
@@ -111,28 +114,14 @@ function fmtM(n){ return n >= 1000000 ? '$' + (n/1000000).toFixed(1) + 'M' : '$'
 function calc(){
   var eq = parseInt(document.getElementById('eq').value);
   document.getElementById('eq-n').textContent = eq;
-  var m = Math.max(0, P[nivel].v - P[nivel].c);
-  var tot = m * eq;
+  var tot = margenXeq * eq;
   document.getElementById('mensual').textContent = fmt(tot);
-  document.getElementById('desc').textContent = eq + ' equipo' + (eq > 1 ? 's' : '') + ' × ' + fmt(m) + ' de margen';
+  document.getElementById('desc').textContent = eq + ' equipo' + (eq > 1 ? 's' : '') + ' × ' + fmt(margenXeq) + ' de margen';
   document.getElementById('anual').textContent = fmtM(tot * 12);
-  document.getElementById('xeq').textContent = fmt(m);
+  document.getElementById('xeq').textContent = fmt(margenXeq);
 }
 
-// Botones de nivel
-var btns = document.querySelectorAll('#btns-nivel .btn');
-for (var i = 0; i < btns.length; i++) {
-  btns[i].addEventListener('click', function(){
-    nivel = this.getAttribute('data-nivel');
-    for (var j = 0; j < btns.length; j++) btns[j].classList.remove('on');
-    this.classList.add('on');
-    calc();
-  });
-}
-
-// Slider
 document.getElementById('eq').addEventListener('input', calc);
-
 calc();
 </script>
 </body>
